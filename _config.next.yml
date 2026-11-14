@@ -16,7 +16,7 @@ sidebar:
   display: always
   position: left
 avatar:
-  rounded: true
+  rounded: false
   rotated: false
   url: /images/chiikawa.png
 social:
