@@ -17,8 +17,8 @@ sidebar:
   position: left
 avatar:
   url: /images/rallarooyo-2121166607611490543-1.jpg
-  rounded: true
-  rotated: true
+  rounded: false
+  rotated: false
 favicon:
   small: /images/rallarooyo-2121166607611490543-1.jpg
   medium: /images/rallarooyo-2121166607611490543-1.jpg
