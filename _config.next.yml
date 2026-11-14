@@ -1,5 +1,5 @@
-scheme: Mist
-darkmode: false
+scheme: Muse
+darkmode: true
 custom_file_path:
   style: source/_data/styles.styl
 menu:
@@ -16,13 +16,8 @@ sidebar:
   display: always
   position: left
 avatar:
-  url: /images/rallarooyo-2121166607611490543-1.jpg
   rounded: false
   rotated: false
-favicon:
-  small: /images/rallarooyo-2121166607611490543-1.jpg
-  medium: /images/rallarooyo-2121166607611490543-1.jpg
-  apple_touch_icon: /images/rallarooyo-2121166607611490543-1.jpg
 social:
   RSS: /atom.xml || fa fa-rss
 toc:
