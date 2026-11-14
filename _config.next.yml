@@ -1,9 +1,7 @@
 scheme: Muse
 darkmode: true
-
 custom_file_path:
   style: source/_data/styles.styl
-
 menu:
   home: / || fa fa-home
   categories: /categories/ || fa fa-th
@@ -11,43 +9,34 @@ menu:
   archives: /archives/ || fa fa-archive
   friends: /links/ || fa fa-link
   about: /about/ || fa fa-user
-
 menu_settings:
   icons: true
   badges: true
-
 sidebar:
   display: always
-
+  position: left
 avatar:
-  url: /images/avatar.png
+  url: /images/rallarooyo-2121166607611490543-1.jpg
   rounded: true
-
+  rotated: true
 favicon:
-  small: /images/favicon-16.png
-  medium: /images/favicon-32.png
-  apple_touch_icon: /images/avatar.png
-  safari_pinned_tab: ''
-
+  small: /images/rallarooyo-2121166607611490543-1.jpg
+  medium: /images/rallarooyo-2121166607611490543-1.jpg
+  apple_touch_icon: /images/rallarooyo-2121166607611490543-1.jpg
 social:
   RSS: /atom.xml || fa fa-rss
-
 toc:
   enable: true
   number: false
   wrap: true
-
 footer:
   since: 2026
   powered: false
   icon:
-    name: ''
-
+    animated: false
 font:
   enable: false
-
 motion:
   enable: false
-
 local_search:
   enable: true
