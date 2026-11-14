@@ -5,8 +5,8 @@ author: 款冬
 language: zh-CN
 timezone: Asia/Shanghai
 
-url: https://witchklee.github.io/baby.github.io
-root: /baby.github.io/
+url: https://witchklee.github.io
+root: /
 permalink: posts/:title/
 theme: next
 

@@ -33,7 +33,7 @@ npm.cmd start
 
 ## 发布到 GitHub Pages
 
-当前仓库：[WitchKlee/baby.github.io](https://github.com/WitchKlee/baby.github.io)。博客网址为 <https://witchklee.github.io/baby.github.io/>。
+当前仓库：[WitchKlee/WitchKlee.github.io](https://github.com/WitchKlee/WitchKlee.github.io)。博客网址为 <https://witchklee.github.io/>。
 
 首次发布完成后，在此文件夹运行以下命令即可更新博客：
 
