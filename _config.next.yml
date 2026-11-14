@@ -16,8 +16,9 @@ sidebar:
   display: always
   position: left
 avatar:
-  rounded: false
+  rounded: true
   rotated: false
+  url: /images/chiikawa.png
 social:
   RSS: /atom.xml || fa fa-rss
 toc:
