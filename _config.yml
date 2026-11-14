@@ -1,32 +1,25 @@
-title: 月下相拥
+title: Klee
 subtitle: 写下正在学的事
 description: 学习笔记与生活随记
 author: 款冬
 language: zh-CN
 timezone: Asia/Shanghai
-
 url: https://witchklee.github.io
 root: /
 permalink: posts/:title/
 theme: next
-
 updated_option: date
-
 highlight:
   enable: true
   line_number: false
-
 index_generator:
   per_page: 8
-
 tag_generator:
   enable_index_page: false
-
 search:
   path: search.xml
   field: post
   content: true
-
 feed:
   type: atom
   path: atom.xml
