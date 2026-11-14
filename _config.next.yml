@@ -13,12 +13,12 @@ menu_settings:
   icons: true
   badges: true
 sidebar:
-  display: always
+  display: hide
   position: left
 avatar:
   rounded: false
   rotated: false
-  url: /images/rallarooyo-2121166607611490543-2.jpg
+  url: /images/rallarooyo-2121166607611490543-3.jpg
 social:
   RSS: /atom.xml || fa fa-rss
 toc:
