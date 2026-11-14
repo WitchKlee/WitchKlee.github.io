@@ -1,5 +1,5 @@
 scheme: Mist
-darkmode: true
+darkmode: false
 custom_file_path:
   style: source/_data/styles.styl
 menu:
