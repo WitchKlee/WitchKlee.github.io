@@ -33,6 +33,6 @@ footer:
 font:
   enable: false
 motion:
-  enable: false
+  enable: true
 local_search:
   enable: true
