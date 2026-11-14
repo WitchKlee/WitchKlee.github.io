@@ -1,0 +1,31 @@
+{
+  "name": "shiyeblog",
+  "version": "1.0.0",
+  "private": true,
+  "hexo": {
+    "version": "8.1.2"
+  },
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "scripts": {
+    "build": "hexo generate",
+    "start": "hexo server --ip 127.0.0.1",
+    "new": "hexo new",
+    "clean": "hexo clean"
+  },
+  "dependencies": {
+    "hexo": "8.1.2",
+    "hexo-generator-archive": "2.0.0",
+    "hexo-generator-category": "2.0.0",
+    "hexo-generator-feed": "4.0.0",
+    "hexo-generator-index": "4.0.0",
+    "hexo-generator-search": "2.4.3",
+    "hexo-generator-tag": "2.0.0",
+    "hexo-renderer-marked": "7.0.1",
+    "hexo-renderer-stylus": "3.0.1",
+    "hexo-server": "3.0.0",
+    "hexo-theme-next": "8.28.0",
+    "hexo-util": "4.0.0"
+  }
+}

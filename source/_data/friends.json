@@ -1,0 +1,26 @@
+[
+  {
+    "name": "钟鼓楼",
+    "url": "https://thysrael.github.io/",
+    "monogram": "钟",
+    "description": "Thysrael 的技术与生活博客"
+  },
+  {
+    "name": "Hexo",
+    "url": "https://hexo.io/zh-cn/",
+    "monogram": "H",
+    "description": "Markdown 静态博客框架"
+  },
+  {
+    "name": "NexT",
+    "url": "https://theme-next.js.org/",
+    "monogram": "N",
+    "description": "本博客使用的 Hexo 主题"
+  },
+  {
+    "name": "MDN Web 文档",
+    "url": "https://developer.mozilla.org/zh-CN/",
+    "monogram": "M",
+    "description": "HTML、CSS 和 JavaScript 参考资料"
+  }
+]

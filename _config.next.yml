@@ -1,0 +1,53 @@
+scheme: Muse
+darkmode: true
+
+custom_file_path:
+  style: source/_data/styles.styl
+
+menu:
+  home: / || fa fa-home
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  archives: /archives/ || fa fa-archive
+  friends: /links/ || fa fa-link
+  about: /about/ || fa fa-user
+
+menu_settings:
+  icons: true
+  badges: true
+
+sidebar:
+  display: always
+
+avatar:
+  url: /images/avatar.png
+  rounded: true
+
+favicon:
+  small: /images/favicon-16.png
+  medium: /images/favicon-32.png
+  apple_touch_icon: /images/avatar.png
+  safari_pinned_tab: false
+
+social:
+  RSS: /atom.xml || fa fa-rss
+
+toc:
+  enable: true
+  number: false
+  wrap: true
+
+footer:
+  since: 2026
+  powered: false
+  icon:
+    name: ''
+
+font:
+  enable: false
+
+motion:
+  enable: false
+
+local_search:
+  enable: true
