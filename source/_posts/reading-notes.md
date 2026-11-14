@@ -1,6 +1,7 @@
 ---
 title: 怎么记一条以后还用得上的笔记
 date: 2026-11-14 09:00:00
+published: true
 categories: 学习笔记
 tags: [写作, 阅读]
 ---

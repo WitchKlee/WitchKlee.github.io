@@ -2,6 +2,14 @@
 
 基于 Hexo 8 和 NexT Muse 的中文个人博客。包含文章、分类、标签、归档、站内搜索、RSS、关于和响应式友链页。站名、博主名、示例文章和友链都可以换成自己的。
 
+## 在网页后台写文章
+
+写作后台：[Pages CMS](https://app.pagescms.org/)。首次使用需登录 GitHub，并将 Pages CMS 的 GitHub App 授权给 `WitchKlee.github.io` 仓库，随后选择 `main` 分支。
+
+在「文章」中创建文章、填写标题、分类、标签并编辑正文。新文章默认不发布，确认内容后开启「发布到网站」并点击保存，GitHub Actions 会自动更新博客。
+
+后台还可以上传图片、编辑「关于我」和「友情链接」。完整步骤及注意事项见 [Pages CMS 使用指南](docs/PAGES-CMS.md)。
+
 ## 在 Windows 上预览
 
 安装 [Node.js 24](https://nodejs.org/) 后，在此文件夹打开 PowerShell，运行：

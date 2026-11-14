@@ -1,0 +1,113 @@
+# Pages CMS: https://pagescms.org/docs/
+media:
+  input: source/images
+  output: /images
+  categories: [image]
+  rename: safe
+
+content:
+  - name: posts
+    label: 文章
+    type: collection
+    path: source/_posts
+    format: yaml-frontmatter
+    subfolders: false
+    filename: "{year}-{month}-{day}-{hour}{minute}{second}-{primary}.md"
+    view:
+      primary: title
+      fields: [title, published, date, categories]
+      sort: [date, title]
+      search: [title, categories, tags]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: date
+        label: 文章时间
+        type: date
+        required: true
+        description: 使用北京时间。这个时间用于文章排序，不是定时发布开关。
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm:ss"
+      - name: published
+        label: 发布到网站
+        type: boolean
+        default: false
+        description: 关闭时保存为草稿；开启并保存后会自动部署。草稿文件仍保存在公开 GitHub 仓库中。
+      - name: categories
+        label: 分类
+        type: string
+        description: 填一个分类名称，例如随记、学习笔记；留空则不分类。
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+        description: 每项填写一个标签，可以添加多项。
+      - name: body
+        label: 正文
+        type: rich-text
+        required: true
+        description: 支持格式工具和插图。含 Hexo 标签或 <!-- more --> 的文章请使用 Source 源码模式编辑。
+        options:
+          format: markdown
+          switcher: true
+
+  - name: about
+    label: 关于我
+    type: file
+    path: source/about/index.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: 页面标题
+        type: string
+        required: true
+      - name: comments
+        type: boolean
+        default: false
+        hidden: true
+      - name: body
+        label: 正文
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+
+  - name: friends
+    label: 友情链接
+    type: file
+    path: source/_data/friends.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: 网站名称
+        type: string
+        required: true
+      - name: url
+        label: 网站地址
+        type: string
+        required: true
+        pattern:
+          regex: '^https?://[^\s]+$'
+          message: 请填写以 https:// 或 http:// 开头的完整网址。
+      - name: description
+        label: 一句话介绍
+        type: string
+      - name: monogram
+        label: 头像文字
+        type: string
+        description: 没有图片时显示这个字；留空则使用网站名称的第一个字。
+      - name: avatar
+        label: 头像图片
+        type: image
+        description: 可选；有图片时优先显示图片。
+
+settings:
+  content:
+    merge: true
