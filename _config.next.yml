@@ -27,7 +27,7 @@ favicon:
   small: /images/favicon-16.png
   medium: /images/favicon-32.png
   apple_touch_icon: /images/avatar.png
-  safari_pinned_tab: false
+  safari_pinned_tab: ''
 
 social:
   RSS: /atom.xml || fa fa-rss

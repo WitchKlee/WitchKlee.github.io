@@ -1,10 +1,11 @@
 # Pages CMS: https://pagescms.org/docs/
+# Structured forms cover every existing site/theme setting; advanced editors retain full source access.
 media:
   input: source/images
   output: /images
-  categories: [image]
+  categories:
+    - image
   rename: safe
-
 content:
   - name: posts
     label: 文章
@@ -15,9 +16,18 @@ content:
     filename: "{year}-{month}-{day}-{hour}{minute}{second}-{primary}.md"
     view:
       primary: title
-      fields: [title, published, date, categories]
-      sort: [date, title]
-      search: [title, categories, tags]
+      fields:
+        - title
+        - published
+        - date
+        - categories
+      sort:
+        - date
+        - title
+      search:
+        - title
+        - categories
+        - tags
       default:
         sort: date
         order: desc
@@ -33,7 +43,7 @@ content:
         description: 使用北京时间。这个时间用于文章排序，不是定时发布开关。
         options:
           time: true
-          format: "yyyy-MM-dd HH:mm:ss"
+          format: yyyy-MM-dd HH:mm:ss
       - name: published
         label: 发布到网站
         type: boolean
@@ -56,28 +66,457 @@ content:
         options:
           format: markdown
           switcher: true
-
-  - name: about
-    label: 关于我
+  - name: site_settings
+    label: 站点信息
     type: file
-    path: source/about/index.md
-    format: yaml-frontmatter
+    path: _config.yml
+    format: yaml
     fields:
       - name: title
-        label: 页面标题
+        label: 网站名称
         type: string
         required: true
-      - name: comments
-        type: boolean
-        default: false
-        hidden: true
-      - name: body
-        label: 正文
-        type: rich-text
+      - name: subtitle
+        label: 网站副标题
+        type: string
+      - name: description
+        label: 网站简介
+        type: text
+      - name: author
+        label: 博主昵称
+        type: string
+        required: true
+      - name: keywords
+        label: 搜索关键词
+        type: string
+        description: 可选，多个关键词用英文逗号隔开。
+      - name: email
+        label: 联系邮箱
+        type: string
+        description: 可选，填写你愿意公开的邮箱。
+      - name: language
+        label: 网站语言
+        type: string
+        required: true
+        description: 当前为 zh-CN（简体中文）。
+      - name: timezone
+        label: 网站时区
+        type: string
+        required: true
+        description: 北京时间使用 Asia/Shanghai。
+      - name: url
+        label: 正式网址
+        type: string
+        required: true
+        description: 当前为 https://witchklee.github.io；修改此项不会自动注册或绑定新域名。
+        pattern:
+          regex: ^https?://[^\s]+$
+          message: 请填写完整的 http 或 https 网址。
+      - name: root
+        label: 网站根路径
+        type: string
+        required: true
+        description: 当前网站部署在域名根目录，保持 /。
+      - name: permalink
+        label: 文章链接规则
+        type: string
+        required: true
+        description: 当前 posts/:title/。改动会改变文章链接。
+      - name: theme
+        label: 主题目录名
+        type: string
+        required: true
+        description: 当前安装的是 next；页面布局方案在「头像与外观」中选择。
+      - name: updated_option
+        label: 文章更新时间来源
+        type: select
         options:
-          format: markdown
-          switcher: true
-
+          values:
+            - date
+            - mtime
+            - empty
+      - name: highlight
+        label: 代码高亮
+        type: object
+        fields:
+          - name: enable
+            label: 启用高亮
+            type: boolean
+          - name: line_number
+            label: 显示代码行号
+            type: boolean
+      - name: index_generator
+        label: 首页文章列表
+        type: object
+        fields:
+          - name: per_page
+            label: 每页文章数
+            type: number
+            options:
+              min: 0
+              max: 100
+              step: 1
+            description: 0 表示不分页。
+      - name: tag_generator
+        label: 标签索引生成
+        type: object
+        fields:
+          - name: enable_index_page
+            label: 由插件生成标签索引
+            type: boolean
+            description: 当前关闭，标签首页由「页面 → 标签页」提供。
+      - name: search
+        label: 搜索内容生成
+        type: object
+        fields:
+          - name: path
+            label: 搜索数据文件
+            type: string
+            required: true
+          - name: field
+            label: 收录范围
+            type: select
+            options:
+              values:
+                - post
+                - page
+                - all
+          - name: content
+            label: 收录正文
+            type: boolean
+      - name: feed
+        label: RSS 订阅生成
+        type: object
+        fields:
+          - name: type
+            label: 订阅格式
+            type: string
+            description: 当前 atom；支持 atom、rss2 等插件格式。
+          - name: path
+            label: 订阅文件路径
+            type: string
+            required: true
+          - name: limit
+            label: 收录文章数
+            type: number
+            options:
+              min: 0
+              max: 1000
+              step: 1
+            description: 0 表示全部文章。
+  - name: theme_settings
+    label: 头像与外观
+    type: file
+    path: _config.next.yml
+    format: yaml
+    fields:
+      - name: scheme
+        label: 主题布局方案
+        type: select
+        options:
+          values:
+            - Muse
+            - Mist
+            - Pisces
+            - Gemini
+      - name: darkmode
+        label: 启用深色模式
+        type: boolean
+        description: 开启后由访客的系统配色决定。
+      - name: avatar
+        label: 博主头像
+        type: object
+        fields:
+          - name: url
+            label: 头像图片
+            type: image
+            description: 点选已有图片，或上传新头像；保存后自动更新。
+          - name: rounded
+            label: 圆形头像
+            type: boolean
+          - name: rotated
+            label: 头像悬停旋转
+            type: boolean
+            default: false
+      - name: favicon
+        label: 浏览器与设备图标
+        type: object
+        fields:
+          - name: small
+            label: 小图标（建议 16×16 PNG）
+            type: image
+            description: 显示在浏览器标签页。
+          - name: medium
+            label: 常规图标（建议 32×32 PNG）
+            type: image
+            description: 显示在浏览器标签页。
+          - name: apple_touch_icon
+            label: 苹果设备主屏幕图标
+            type: image
+            description: 建议使用正方形 PNG。
+          - name: safari_pinned_tab
+            label: Safari 固定标签图标
+            type: image
+            description: 可选，选择单色 SVG；留空禁用。
+            options:
+              extensions:
+                - svg
+      - name: menu
+        label: 导航菜单链接
+        type: object
+        fields:
+          - name: home
+            label: 首页
+            type: string
+            required: true
+            description: 格式：页面路径 || 图标，例如 /about/ || fa fa-user。新增、删除或调整顺序可用「高级编辑 → 完整主题配置」。
+          - name: categories
+            label: 分类
+            type: string
+            required: true
+            description: 格式：页面路径 || 图标，例如 /about/ || fa fa-user。新增、删除或调整顺序可用「高级编辑 → 完整主题配置」。
+          - name: tags
+            label: 标签
+            type: string
+            required: true
+            description: 格式：页面路径 || 图标，例如 /about/ || fa fa-user。新增、删除或调整顺序可用「高级编辑 → 完整主题配置」。
+          - name: archives
+            label: 归档
+            type: string
+            required: true
+            description: 格式：页面路径 || 图标，例如 /about/ || fa fa-user。新增、删除或调整顺序可用「高级编辑 → 完整主题配置」。
+          - name: friends
+            label: 友链
+            type: string
+            required: true
+            description: 格式：页面路径 || 图标，例如 /about/ || fa fa-user。新增、删除或调整顺序可用「高级编辑 → 完整主题配置」。
+          - name: about
+            label: 关于
+            type: string
+            required: true
+            description: 格式：页面路径 || 图标，例如 /about/ || fa fa-user。新增、删除或调整顺序可用「高级编辑 → 完整主题配置」。
+      - name: menu_settings
+        label: 导航菜单显示
+        type: object
+        fields:
+          - name: icons
+            label: 显示菜单图标
+            type: boolean
+          - name: badges
+            label: 显示文章及分类数量
+            type: boolean
+      - name: sidebar
+        label: 侧栏
+        type: object
+        fields:
+          - name: display
+            label: 显示方式
+            type: select
+            options:
+              values:
+                - name: always
+                  label: 所有页面自动展开
+                - name: post
+                  label: 文章页自动展开
+                - name: hide
+                  label: 点击按钮才展开
+                - name: remove
+                  label: 不显示侧栏及按钮
+          - name: position
+            label: 侧栏位置
+            type: select
+            options:
+              values:
+                - name: left
+                  label: 左侧
+                - name: right
+                  label: 右侧
+            default: left
+      - name: social
+        label: 社交与订阅链接
+        type: object
+        fields:
+          - name: RSS
+            label: RSS
+            type: string
+            required: true
+            description: 格式：完整网址 || 图标。新增任意平台或移除链接，请使用「高级编辑 → 完整主题配置」的 social 部分。
+      - name: toc
+        label: 文章目录
+        type: object
+        fields:
+          - name: enable
+            label: 显示目录
+            type: boolean
+          - name: number
+            label: 显示章节编号
+            type: boolean
+          - name: wrap
+            label: 长标题自动换行
+            type: boolean
+      - name: footer
+        label: 页脚
+        type: object
+        fields:
+          - name: since
+            label: 建站年份
+            type: number
+            options:
+              min: 1900
+              max: 2200
+              step: 1
+          - name: powered
+            label: 显示 Hexo 与 NexT 署名
+            type: boolean
+          - name: copyright
+            label: 版权署名
+            type: string
+            description: 可选，留空使用博主昵称。
+          - name: icon
+            label: 版权图标
+            type: object
+            fields:
+              - name: name
+                label: 图标名称
+                type: string
+                description: 例如 fa fa-heart，留空不显示。
+              - name: animated
+                label: 图标动画
+                type: boolean
+                default: false
+              - name: color
+                label: 图标颜色
+                type: string
+                description: "可选，例如 #854653。"
+                pattern:
+                  regex: ^(|#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8})$
+                  message: 请填写十六进制颜色，或留空。
+      - name: font
+        label: 主题字体
+        type: object
+        fields:
+          - name: enable
+            label: 启用主题字体设置
+            type: boolean
+            description: 自定义样式中已设置中文字体。要修改目前使用的字体和字号，请到「高级编辑 → 颜色与排版样式」。
+      - name: motion
+        label: 主题动效
+        type: object
+        fields:
+          - name: enable
+            label: 启用页面动效
+            type: boolean
+      - name: local_search
+        label: 站内搜索入口
+        type: object
+        fields:
+          - name: enable
+            label: 启用站内搜索
+            type: boolean
+      - name: custom_file_path
+        label: 自定义样式文件
+        type: object
+        fields:
+          - name: style
+            label: 样式源文件路径
+            type: string
+            required: true
+            description: 当前 source/_data/styles.styl。对应高级编辑中的「颜色与排版样式」。
+  - name: pages_group
+    label: 页面
+    type: group
+    items:
+      - name: about
+        label: 关于我
+        type: file
+        path: source/about/index.md
+        format: yaml-frontmatter
+        fields:
+          - name: title
+            label: 页面标题
+            type: string
+            required: true
+          - name: comments
+            type: boolean
+            default: false
+            hidden: false
+            label: 允许评论
+          - name: body
+            label: 正文
+            type: rich-text
+            options:
+              format: markdown
+              switcher: true
+      - name: categories_page
+        label: 分类页
+        type: file
+        path: source/categories/index.md
+        format: yaml-frontmatter
+        fields:
+          - name: title
+            label: 页面标题
+            type: string
+            required: true
+          - name: comments
+            label: 允许评论
+            type: boolean
+            default: false
+          - name: type
+            label: 页面类型
+            type: string
+            readonly: true
+            description: 由 Hexo 自动生成此页的分类或标签列表。
+          - name: body
+            label: 正文与模板标签
+            type: code
+            options:
+              format: markdown
+            description: 可选，页面开头的说明文字。
+      - name: tags_page
+        label: 标签页
+        type: file
+        path: source/tags/index.md
+        format: yaml-frontmatter
+        fields:
+          - name: title
+            label: 页面标题
+            type: string
+            required: true
+          - name: comments
+            label: 允许评论
+            type: boolean
+            default: false
+          - name: type
+            label: 页面类型
+            type: string
+            readonly: true
+            description: 由 Hexo 自动生成此页的分类或标签列表。
+          - name: body
+            label: 正文与模板标签
+            type: code
+            options:
+              format: markdown
+            description: 可选，页面开头的说明文字。
+      - name: links_page
+        label: 友链页说明
+        type: file
+        path: source/links/index.md
+        format: yaml-frontmatter
+        fields:
+          - name: title
+            label: 页面标题
+            type: string
+            required: true
+          - name: comments
+            label: 允许评论
+            type: boolean
+            default: false
+          - name: body
+            label: 正文与模板标签
+            type: code
+            options:
+              format: markdown
+            description: 保留 {% friend_links %}，友链卡片会在此处生成；可在它前后写说明。
   - name: friends
     label: 友情链接
     type: file
@@ -94,7 +533,7 @@ content:
         type: string
         required: true
         pattern:
-          regex: '^https?://[^\s]+$'
+          regex: ^https?://[^\s]+$
           message: 请填写以 https:// 或 http:// 开头的完整网址。
       - name: description
         label: 一句话介绍
@@ -107,7 +546,60 @@ content:
         label: 头像图片
         type: image
         description: 可选；有图片时优先显示图片。
-
+  - name: advanced_group
+    label: 高级编辑
+    type: group
+    items:
+      - name: site_raw
+        label: 完整站点配置
+        type: file
+        path: _config.yml
+        format: code
+      - name: theme_raw
+        label: 完整主题配置（含任意社交链接）
+        type: file
+        path: _config.next.yml
+        format: code
+      - name: styles_raw
+        label: 颜色与排版样式
+        type: file
+        path: source/_data/styles.styl
+        format: code
+      - name: labels_raw
+        label: 导航文字与翻译
+        type: file
+        path: source/_data/languages.yml
+        format: code
+      - name: post_template_raw
+        label: 本地新文章模板
+        type: file
+        path: scaffolds/post.md
+        format: code
+      - name: friends_script_raw
+        label: 友链卡片模板脚本
+        type: file
+        path: scripts/friend-links.js
+        format: code
+      - name: controls_injector_raw
+        label: 交互脚本加载设置
+        type: file
+        path: scripts/blog-controls.js
+        format: code
+      - name: controls_browser_raw
+        label: 网页交互脚本
+        type: file
+        path: source/js/blog-controls.js
+        format: code
+      - name: guide_raw
+        label: 后台使用指南
+        type: file
+        path: docs/PAGES-CMS.md
+        format: code
+      - name: legacy_post_raw
+        label: 旧文章原稿（未发布）
+        type: file
+        path: source/_posts/2
+        format: code
 settings:
   content:
     merge: true
